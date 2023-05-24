@@ -1,0 +1,37 @@
+<div class="flex justify-center items-center h-screen">
+    <div class="bg-gray-400 p-8 rounded-xl shadow-xl w-2/4">
+        <h2 class="text-2xl mb-4 text-center">Coach</h2>
+
+        <div class="mb-4">
+            <div *ngFor="let row of seats" class="flex justify-center">
+              <div *ngFor="let seat of row; let j = index" [ngClass]="{'bg-red-500': seat === 1}" class="w-8 h-8 border border-black">
+                <svg class="w-full h-full" viewBox="0 0 24 24">
+                  <path d="M19 9h2v6h-2zM3 9h2v6H3zM21 7v10H3V7h18m0-2H3c-1.11 0-2 .89-2 2v10a2 2 0 002 2h18a2 2 0 002-2V7a2 2 0 00-2-2z" fill="#000"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        <div class="mb-4 flex justify-center text-center items-center">
+            <input type="number" #seatCount
+              class="border border-gray-300 px-4 py-2 w-60 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Please enter seat number">
+            <button (click)="reserveSeats(seatCount.value,true); seatCount.value=''"
+              class="bg-blue-500 ml-4 text-white px-4 py-2 rounded">Reserve</button>
+              <button (click)="clearSeats()"
+            class="bg-red-500 ml-4 text-white px-4 py-2 rounded">Clear Seats</button>
+          </div>          
+
+        <p class="text-center">Reserved Seats: {{ reservedSeats.length }}</p>
+    </div>
+</div>
+
+<div [ngClass]="{'bg-red-500': showAlert, 'hidden': !showAlert}"
+    class="fixed top-0 left-0 right-0 p-4 text-white text-center">
+    {{errorMessage}}
+</div>
+
+<div [ngClass]="{'bg-green-500': showSuccess, 'hidden': !showSuccess}"
+    class="fixed top-0 left-0 right-0 p-4 text-white text-center">
+    {{successMessage}}
+</div>
